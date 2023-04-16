@@ -1,13 +1,13 @@
 {% set name = "anaflow" %}
-{% set version = "1.0.1" %}
+{% set version = "1.1.0" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
-  sha256: 89d3ccfa204bd1adbc3f75e38849e25f1502e935ddddaf3f42f392168d0b1824
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: cf0173e7e95c4ccea4db0444eabeff30463a41ab752c9a2fbd1d02aff36aca7b
 
 build:
   noarch: python
@@ -37,11 +37,11 @@ test:
     - pytest -vv tests
 
 about:
-  home: "https://github.com/GeoStat-Framework/AnaFlow"
+  home: https://github.com/GeoStat-Framework/AnaFlow
   license: MIT
   license_family: MIT
   license_file: LICENSE
-  summary: "AnaFlow - analytical solutions for the groundwater-flow equation."
+  summary: AnaFlow - analytical solutions for the groundwater-flow equation.
   doc_url: https://anaflow.readthedocs.io/
   dev_url: https://github.com/GeoStat-Framework/AnaFlow
 

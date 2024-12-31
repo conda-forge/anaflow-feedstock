@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: cf0173e7e95c4ccea4db0444eabeff30463a41ab752c9a2fbd1d02aff36aca7b
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
     - setuptools >=64
     - setuptools_scm >=7
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - numpy >=1.14.5
     - pentapy >=1.1.0
     - scipy >=1.1.0
@@ -31,6 +31,7 @@ test:
     - anaflow
   requires:
     - pytest
+    - python {{ python_min }}
   source_files:
     - tests
   commands:

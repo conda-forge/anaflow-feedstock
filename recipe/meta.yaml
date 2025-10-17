@@ -1,5 +1,5 @@
 {% set name = "anaflow" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,11 +7,11 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cf0173e7e95c4ccea4db0444eabeff30463a41ab752c9a2fbd1d02aff36aca7b
+  sha256: 150e1901c4ccbba14066b7ec607bba393a9cab43ae878747937417f4d50649f7
 
 build:
   noarch: python
-  number: 1
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:

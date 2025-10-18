@@ -1,5 +1,5 @@
 {% set name = "anaflow" %}
-{% set version = "1.1.0" %}
+{% set version = "1.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,31 +7,43 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: cf0173e7e95c4ccea4db0444eabeff30463a41ab752c9a2fbd1d02aff36aca7b
+  sha256: 150e1901c4ccbba14066b7ec607bba393a9cab43ae878747937417f4d50649f7
 
 build:
-  noarch: python
-  number: 1
-  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
+  build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
+    - scipy                                  # [build_platform != target_platform]
+    - pentapy                                # [build_platform != target_platform]
+    - {{ compiler("c") }}
+    - {{ stdlib("c") }}
   host:
     - pip
-    - python {{ python_min }}
+    - python
     - setuptools >=64
     - setuptools_scm >=7
-  run:
-    - python >={{ python_min }}
-    - numpy >=1.14.5
+    - cython >=3.0
+    - numpy
+    - scipy
     - pentapy >=1.1.0
-    - scipy >=1.1.0
+  run:
+    - python
+    - numpy >=1.20.0
+    - {{ pin_compatible('scipy') }}
+    - pentapy >=1.1.0
 
 test:
   imports:
     - anaflow
   requires:
     - pytest
-    - python {{ python_min }}
   source_files:
     - tests
   commands:
